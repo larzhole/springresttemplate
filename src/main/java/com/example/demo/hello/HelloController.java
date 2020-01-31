@@ -1,12 +1,10 @@
 package com.example.demo.hello;
 
-import com.example.demo.security.SecurityRoles;
 import com.example.demo.utilities.annotations.DTO;
 import com.example.demo.utilities.annotations.Loggable;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.access.annotation.Secured;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -35,10 +33,6 @@ public class HelloController {
 
     @GetMapping
     @DTO(HelloDTO.class)
-    @Secured({
-            SecurityRoles.ROLE_1,
-            SecurityRoles.ROLE_2
-    })
     @Loggable
     public ResponseEntity getHellos() {
         return ResponseEntity.ok(helloService.getHellos());
@@ -46,10 +40,6 @@ public class HelloController {
 
     @GetMapping(path = "{id}")
     @DTO(HelloDTO.class)
-    @Secured({
-            SecurityRoles.ROLE_1,
-            SecurityRoles.ROLE_2
-    })
     @Loggable
     public ResponseEntity getHelloById(@PathVariable @NotNull Long id) throws HelloNotFoundException {
         return ResponseEntity.ok(helloService.getById(id));
@@ -57,10 +47,6 @@ public class HelloController {
 
     @PostMapping
     @DTO(HelloDTO.class)
-    @Secured({
-            SecurityRoles.ROLE_1,
-            SecurityRoles.ROLE_2
-    })
     @Loggable
     public ResponseEntity addHello(HelloDTO helloDTO) {
         return ResponseEntity.ok(helloService.addHello(dtoToEntity(helloDTO)));
@@ -68,10 +54,6 @@ public class HelloController {
 
     @PutMapping(path = "{id}")
     @DTO(HelloDTO.class)
-    @Secured({
-            SecurityRoles.ROLE_1,
-            SecurityRoles.ROLE_2
-    })
     @Loggable
     public ResponseEntity updateHello(@PathVariable Long id,
                                       @RequestBody HelloDTO helloDTO) throws HelloNotFoundException {
@@ -81,10 +63,6 @@ public class HelloController {
 
     @DeleteMapping(path = "{id}")
     @DTO(HelloDTO.class)
-    @Secured({
-            SecurityRoles.ROLE_1,
-            SecurityRoles.ROLE_2
-    })
     @Loggable
     public ResponseEntity deleteHello(@PathVariable Long id) throws HelloNotFoundException {
         helloService.deleteHello(id);

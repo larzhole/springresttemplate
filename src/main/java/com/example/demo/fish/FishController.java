@@ -1,12 +1,10 @@
 package com.example.demo.fish;
 
-import com.example.demo.security.SecurityRoles;
 import com.example.demo.utilities.annotations.DTO;
 import com.example.demo.utilities.annotations.Loggable;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.access.annotation.Secured;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -32,10 +30,6 @@ public class FishController {
 
     @GetMapping
     @DTO(FishDTO.class)
-    @Secured({
-            SecurityRoles.ROLE_1,
-            SecurityRoles.ROLE_2
-    })
     @Loggable
     public ResponseEntity getFishes() {
         return ResponseEntity.ok(fishService.getFishes());
@@ -43,10 +37,6 @@ public class FishController {
 
     @GetMapping(path = "{id}")
     @DTO(FishDTO.class)
-    @Secured({
-            SecurityRoles.ROLE_1,
-            SecurityRoles.ROLE_2
-    })
     @Loggable
     public ResponseEntity getFishById(@PathVariable Long id) throws FishNotFoundException {
         return ResponseEntity.ok(fishService.getById(id));
@@ -54,10 +44,6 @@ public class FishController {
 
     @PostMapping
     @DTO(FishDTO.class)
-    @Secured({
-            SecurityRoles.ROLE_1,
-            SecurityRoles.ROLE_2
-    })
     @Loggable
     public ResponseEntity addFish(@RequestBody FishDTO fishDTO) {
         return ResponseEntity.ok(fishService.addFish(dtoToEntity(fishDTO)));
@@ -65,10 +51,6 @@ public class FishController {
 
     @PutMapping(path = "{id}")
     @DTO(FishDTO.class)
-    @Secured({
-            SecurityRoles.ROLE_1,
-            SecurityRoles.ROLE_2
-    })
     @Loggable
     public ResponseEntity updateFish(@PathVariable Long id,
                                      @RequestBody FishDTO fishDTO) throws FishNotFoundException {
@@ -78,9 +60,6 @@ public class FishController {
 
     @DeleteMapping(path = "{id}")
     @DTO(FishDTO.class)
-    @Secured({
-            SecurityRoles.ROLE_1
-    })
     @Loggable
     public ResponseEntity deleteFish(@PathVariable Long id) throws FishNotFoundException {
         fishService.deleteFish(id);
