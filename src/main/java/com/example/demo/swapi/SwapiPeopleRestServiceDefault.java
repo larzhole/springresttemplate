@@ -25,9 +25,9 @@ public class SwapiPeopleRestServiceDefault implements SwapiPeopleRestService {
         try {
             final UriComponentsBuilder builder = UriComponentsBuilder.fromUriString(
                     swapiProperties.getUrl() +
-                    "/" +
                     swapiProperties.getPeople() +
-                            id
+                    "/" +
+                    id
             );
 
             return restTemplate.getForEntity(builder.toUriString(), People.class)

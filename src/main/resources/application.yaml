@@ -9,8 +9,8 @@ spring:
 
 ## Context path
 server:
-  :servlet
-    :context-path=/api/v1
+  servlet:
+    context-path: /api/v1
 
 ## Swapi star wars api
 swapi:
